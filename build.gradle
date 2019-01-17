@@ -8,6 +8,7 @@ buildscript {
 		maven {
 			url 'http://repo.spring.io/milestone'
 		}
+
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -27,6 +28,9 @@ sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'http://repo.spring.io/milestone'
+	}
 }
 
 dependencies {
@@ -34,7 +38,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation "org.jetbrains.kotlin:kotlin-reflect"
-	implementation "org.springframework.fu:spring-fu-kofu:0.0.3"
+	implementation "org.springframework.fu:spring-fu-kofu:0.0.4"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 }
