@@ -6,3 +6,12 @@ val app = webApplication {
 
 }
 
+val t = table {
+        tr {
+            td {  }
+
+    }
+}
+
+fun table(init: TABLE.() -> Unit) {}
+
