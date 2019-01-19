@@ -1,5 +1,5 @@
 package org.bbelovic.spring.kotlin.hokus.springkotlinhokus
 
-class TD {
+class TD : Tag("td") {
 
 }

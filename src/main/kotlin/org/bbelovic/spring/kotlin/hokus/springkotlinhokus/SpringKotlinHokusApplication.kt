@@ -1,17 +1,23 @@
 package org.bbelovic.spring.kotlin.hokus.springkotlinhokus
 
-import org.springframework.fu.kofu.webApplication
+//val app = webApplication {
+//
+//}
 
-val app = webApplication {
-
-}
-
-val t = table {
+fun test() {
+    val t = table {
         tr {
-            td {  }
+            td {
 
+            }
+        }
     }
+
+    println(t)
 }
 
-fun table(init: TABLE.() -> Unit) {}
+fun main(arr: Array<String>) {
+    test()
+}
+
 
