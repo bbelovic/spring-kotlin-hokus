@@ -1,23 +1,17 @@
 package org.bbelovic.spring.kotlin.hokus.springkotlinhokus
 
-//val app = webApplication {
-//
-//}
+import org.springframework.fu.kofu.web.server
+import org.springframework.fu.kofu.webApplication
 
-fun test() {
-    val t = table {
-        tr {
-            td {
-
-            }
+val app = webApplication {
+    server {
+        router {
+            GET("/") { ok().syncBody("blabol") }
         }
     }
 
-    println(t)
 }
 
-fun main(arr: Array<String>) {
-    test()
+fun main() {
+    app.run()
 }
-
-
