@@ -4,11 +4,19 @@ import org.springframework.fu.kofu.web.server
 import org.springframework.fu.kofu.webApplication
 
 val app = webApplication {
+    beans {
+        bean<EncryptionHandler>()
+    }
     server {
         router {
-            GET("/") { ok().syncBody("blabol") }
+            val handler = ref<EncryptionHandler>()
+            GET("/") { req -> handler.encrypt(req) }
+        }
+        codecs {
+            jackson()
         }
     }
+
 
 }
 
