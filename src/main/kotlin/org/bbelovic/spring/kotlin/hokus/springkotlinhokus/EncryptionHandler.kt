@@ -13,7 +13,7 @@ class EncryptionHandler {
                 .body(mono, EncryptionPayload::class.java)
     }
 
-    private fun encrypt(input: String): String {
+    fun encrypt(input: String): String {
 //        input.asSequence().mapTo()
 
         return ""
