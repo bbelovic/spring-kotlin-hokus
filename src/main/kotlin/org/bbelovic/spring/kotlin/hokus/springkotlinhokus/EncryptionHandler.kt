@@ -14,8 +14,9 @@ class EncryptionHandler {
     }
 
     fun encrypt(input: String): String {
-//        input.asSequence().mapTo()
-
-        return ""
+        return input.fold(StringBuilder("")) {sb: StringBuilder, c: Char ->
+            val enc = ((c.toInt() + 3 - 65) % 26) + 65
+            sb.append((enc.toChar()))}
+                .toString()
     }
 }
