@@ -17,8 +17,6 @@ val app = webApplication {
             jackson()
         }
     }
-
-
 }
 
 fun main() {

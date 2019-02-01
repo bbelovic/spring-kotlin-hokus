@@ -9,8 +9,12 @@ import reactor.core.publisher.Mono
 class EncryptionHandler {
     fun encrypt(req: ServerRequest): Mono<out ServerResponse> {
         val mono = req.bodyToMono(EncryptionPayload::class.java)
+
+        val result = mono.map { encrypt(it.payload) }
+                .map { EncryptionPayload(it) }
+
         return ok().contentType(MediaType.APPLICATION_JSON)
-                .body(mono, EncryptionPayload::class.java)
+                .body(result, EncryptionPayload::class.java)
     }
 
     fun encrypt(input: String): String {
