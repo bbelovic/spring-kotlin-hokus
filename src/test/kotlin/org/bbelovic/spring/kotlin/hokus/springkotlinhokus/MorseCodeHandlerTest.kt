@@ -17,6 +17,10 @@ class MorseCodeHandlerTest(private var input: String, private var expected: Stri
 
     companion object {
         @JvmStatic @Parameters
-        fun testData() = listOf(arrayOf("ABA", "._ _... ._"))
+        fun testData() = listOf(
+                arrayOf("ABA", "._ _... ._"),
+                arrayOf("A", "._"),
+                arrayOf("123", ".____ ..___ ...__")
+        )
     }
 }
