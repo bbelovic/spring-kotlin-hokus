@@ -1,13 +1,22 @@
 package org.bbelovic.spring.kotlin.hokus.springkotlinhokus
 
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import org.junit.runners.Parameterized.Parameters
 
-class MorseCodeHandlerTest {
+@RunWith(Parameterized::class)
+class MorseCodeHandlerTest(private var input: String, private var expected: String) {
+
     @Test
     fun `should encode input text to Morse code`() {
-        val input = "ABA"
         val actual = MorseCodeHandler().encrypt(input)
-        Assert.assertEquals("._ _... ._", actual)
+        assertEquals(expected, actual)
+    }
+
+    companion object {
+        @JvmStatic @Parameters
+        fun testData() = listOf(arrayOf("ABA", "._ _... ._"))
     }
 }
