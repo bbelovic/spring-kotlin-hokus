@@ -1,7 +1,7 @@
 package org.bbelovic.spring.kotlin.hokus.springkotlinhokus
 
 class MorseCodeHandler {
-    private val codes = mapOf('A' to "._",
+    private val charToMorse = mapOf('A' to "._",
             'B' to "_...",
             'C' to "_._.",
             'D' to "_..",
@@ -39,11 +39,20 @@ class MorseCodeHandler {
             '0' to "_____"
     )
 
-    fun encrypt(input: String): String {
-        return input.fold(StringBuilder("")) {sb: StringBuilder, ch: Char ->
-            sb.append(codes[ch])
-                    .append(" ")
-        }.toString().trim()
+    private val morseToChar = invert(charToMorse)
 
+    fun encrypt(input: String): String {
+        return input.asSequence().joinToString(separator = " ") {
+            charToMorse.getOrDefault(it, "")
+        }
+    }
+
+    private fun invert(m: Map<Char, CharSequence>): Map<CharSequence, Char> {
+        return m.asSequence().associate { entry -> entry.value to entry.key }
+    }
+
+    fun decrypt(encrypted: String): CharSequence {
+        return encrypted.splitToSequence(delimiters = *arrayOf(" "))
+                .joinToString(separator = "") { morseToChar.getOrDefault(it, ' ').toString()}
     }
 }

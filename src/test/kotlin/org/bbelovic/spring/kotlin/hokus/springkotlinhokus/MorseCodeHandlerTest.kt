@@ -7,12 +7,18 @@ import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
 
 @RunWith(Parameterized::class)
-class MorseCodeHandlerTest(private var input: String, private var expected: String) {
+class MorseCodeHandlerTest(private var plain: String, private var encrypted: String) {
 
     @Test
-    fun `should encode input text to Morse code`() {
-        val actual = MorseCodeHandler().encrypt(input)
-        assertEquals(expected, actual)
+    fun `should encode plain text to Morse code`() {
+        val actual = MorseCodeHandler().encrypt(plain)
+        assertEquals(encrypted, actual)
+    }
+
+    @Test
+    fun `should decode Morse code to plain text`() {
+        val actual = MorseCodeHandler().decrypt(encrypted)
+        assertEquals(plain, actual)
     }
 
     companion object {
