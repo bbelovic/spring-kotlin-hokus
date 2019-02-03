@@ -1,5 +1,11 @@
 package org.bbelovic.spring.kotlin.hokus.springkotlinhokus
 
+import org.springframework.http.MediaType
+import org.springframework.web.reactive.function.server.ServerRequest
+import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.ServerResponse.ok
+import reactor.core.publisher.Mono
+
 class MorseCodeHandler {
     private val charToMorse = mapOf("A" to "._",
             "B" to "_...",
@@ -41,18 +47,27 @@ class MorseCodeHandler {
 
     private val morseToChar = invert(charToMorse)
 
+    fun encrypt(req: ServerRequest): Mono<ServerResponse> {
+        val mono = req.bodyToMono(EncryptionPayload::class.java)
+                .map { encrypt(it.payload) }
+                .map { EncryptionPayload(it) }
+        return ok().contentType(MediaType.APPLICATION_JSON)
+                .body(mono, EncryptionPayload::class.java)
+
+    }
+
     fun encrypt(input: String): String {
         return input.asSequence().joinToString(separator = " ") {
             charToMorse.getOrDefault(it.toString(), "")
         }
     }
 
-    private fun invert(m: Map<String, String>): Map<CharSequence, CharSequence> {
-        return m.asSequence().associate { entry -> entry.value to entry.key }
-    }
-
     fun decrypt(encrypted: String): CharSequence {
         return encrypted.splitToSequence(delimiters = *arrayOf(" "))
                 .joinToString(separator = "") { morseToChar.getOrDefault(it, ' ').toString()}
+    }
+
+    private fun invert(map: Map<String, String>): Map<CharSequence, CharSequence> {
+        return map.asSequence().associate { entry -> entry.value to entry.key }
     }
 }
